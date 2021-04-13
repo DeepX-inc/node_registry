@@ -6,6 +6,7 @@ export WORKSPACE=${HOME}/ros2/${ROS_DISTRO}/src
 echo "Workspace: ${WORKSPACE}"
 echo "Repo name: ${REPO_NAME}"
 echo "Additonal repo name: ${ADD_REPO_NAME}"
+echo "Additonal repo name 1: ${ADD_REPO_NAME_1}"
 
 if [ ! -d $WORKSPACE ];
 then
@@ -16,6 +17,7 @@ fi
 echo "Symlink of workspace ${WORKSPACE}"
 cp -r ${HOME}/$REPO_NAME $WORKSPACE/
 cp -r ${HOME}/$ADD_REPO_NAME $WORKSPACE/
+cp -r ${HOME}/$ADD_REPO_NAME_1 $WORKSPACE/
 
 echo -c "Building workspace"
 cd $WORKSPACE/..

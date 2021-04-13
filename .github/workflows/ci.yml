@@ -38,6 +38,15 @@ jobs:
           ssh-key: ${{ secrets.DETRABOT_SECRET}}
           clean: true
 
+      - name: Clone deepx_ros_common
+        uses: actions/checkout@v2
+        with:
+          repository: DeepX-inc/deepx_ros_common
+          path: deepx_ros_common
+          ref: feature/launch_utils
+          ssh-key: ${{ secrets.DETRABOT_SECRET}}
+          clean: true
+
       - name: Install Python
         uses: actions/setup-python@v2
         with:
@@ -48,6 +57,7 @@ jobs:
           export DOCKER_IMAGE=krishneel/ros2-foxy:latest
           export REPO_NAME=${{ github.event.repository.name }}
           export ADD_REPO_NAME=deepx_ros_test
+          export ADD_REPO_NAME_1=deepx_ros_common
           export HOME=$GITHUB_WORKSPACE
 
           docker run -v $HOME:$HOME -e ADD_REPO_NAME -e REPO_NAME -e HOME $DOCKER_IMAGE bash -c 'cd $HOME; source ./node_registry/.github/action.sh'

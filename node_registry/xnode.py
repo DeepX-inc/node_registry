@@ -7,6 +7,7 @@ from rclpy.node import Node as N
 
 
 class XNode(N):
+
     def __init__(self, node_name: str, **kwargs: dict):
         super(XNode, self).__init__(
             node_name,
@@ -22,10 +23,10 @@ class XNode(N):
             '\n{s:{c}^{n}}'.format(s='', n=80, c='-') + '\033[0m'
         )
 
-        if os.environ.get("USE_SIM_TIME", "").lower() in ["true", "1"]:
+        if os.environ.get('USE_SIM_TIME', '').lower() in ['true', '1']:
             self.logger.info(f'Node {self.get_name()} is using SIM_TIME')
             param = rclpy.parameter.Parameter(
-                "use_sim_time",
+                'use_sim_time',
                 rclpy.Parameter.Type.BOOL,
                 True,
             )
@@ -46,7 +47,7 @@ class XNode(N):
 
     def __del__(self):
         print(
-            f"\033[34mNode shutdown <<< {self._name} \033[0m"
+            f'\033[34mNode shutdown <<< {self._name} \033[0m'
         )
         try:
             self.destroy_node()

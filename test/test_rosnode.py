@@ -4,8 +4,8 @@ import os
 
 import pytest
 
-from test_common_utils.test_utils import TestUtils
 from test_common_utils.test_config_utils import TestConfigUtils
+from test_common_utils.test_utils import TestUtils
 
 
 _node_name = 'rosnode'
@@ -20,6 +20,7 @@ def generate_test_description():
 
 
 class TestRosNode(TestUtils):
+
     def test_check_all_topics(self):
         self.check_all_topics(expected_output=['/chatter'])
 
