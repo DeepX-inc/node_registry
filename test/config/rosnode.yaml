@@ -1,0 +1,18 @@
+---
+additional_env:
+  PYTHONUNBUFFERED: '1'
+
+nodes:
+  configure: true
+  list:
+    - executable: sys.executable
+      arguments:
+        - 'path: listener_node.py'
+      additional_env: true
+      output: screen
+    - executable: sys.executable
+      arguments:
+        - 'path: talker_node.py'
+      additional_env: true
+      output: screen
+  additional_env: true
