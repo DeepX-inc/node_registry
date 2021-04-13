@@ -60,4 +60,4 @@ jobs:
           export ADD_REPO_NAME_1=deepx_ros_common
           export HOME=$GITHUB_WORKSPACE
 
-          docker run -v $HOME:$HOME -e ADD_REPO_NAME -e REPO_NAME -e HOME $DOCKER_IMAGE bash -c 'cd $HOME; source ./node_registry/.github/action.sh'
+          docker run -v $HOME:$HOME -e ADD_REPO_NAME -e ADD_REPO_NAME_1 -e REPO_NAME -e HOME $DOCKER_IMAGE bash -c 'cd $HOME; source ./node_registry/.github/action.sh'
