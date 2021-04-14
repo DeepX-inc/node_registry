@@ -43,7 +43,6 @@ jobs:
         with:
           repository: DeepX-inc/deepx_ros_common
           path: deepx_ros_common
-          ref: feature/launch_utils
           ssh-key: ${{ secrets.DETRABOT_SECRET}}
           clean: true
 
