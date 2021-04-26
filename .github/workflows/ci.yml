@@ -36,7 +36,6 @@ jobs:
         with:
           repository: DeepX-inc/deepx_ros_test
           path: ${{ env.INSTALL_DIR }}/deepx_ros_test
-          ref: feature/test_common_utils
           ssh-key: ${{ secrets.DETRABOT_SECRET}}
           clean: true
 
