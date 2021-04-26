@@ -20,20 +20,22 @@ defaults:
 jobs:
   build:
     runs-on: ubuntu-20.04
+    env:
+      INSTALL_DIR: ./install
 
     steps:
       - name: Checkout
         uses: actions/checkout@v2
         with:
           ssh-key: ${{ secrets.DETRABOT_SECRET}}
-          path: node_registry
+          path: ${{ env.INSTALL_DIR }}/node_registry
           clean: true
 
       - name: Clone deepx_ros_test
         uses: actions/checkout@v2
         with:
           repository: DeepX-inc/deepx_ros_test
-          path: deepx_ros_test
+          path: ${{ env.INSTALL_DIR }}/deepx_ros_test
           ref: feature/test_common_utils
           ssh-key: ${{ secrets.DETRABOT_SECRET}}
           clean: true
@@ -42,7 +44,7 @@ jobs:
         uses: actions/checkout@v2
         with:
           repository: DeepX-inc/deepx_ros_common
-          path: deepx_ros_common
+          path: ${{ env.INSTALL_DIR }}/deepx_ros_common
           ssh-key: ${{ secrets.DETRABOT_SECRET}}
           clean: true
 
@@ -53,10 +55,9 @@ jobs:
 
       - name: build and test
         run: |
-          export DOCKER_IMAGE=krishneel/ros2-foxy:latest
+          export DOCKER_IMAGE=ros:foxy
           export REPO_NAME=${{ github.event.repository.name }}
-          export ADD_REPO_NAME=deepx_ros_test
-          export ADD_REPO_NAME_1=deepx_ros_common
           export HOME=$GITHUB_WORKSPACE
+          export ACTION_BUILD_DIR=$(pwd)/$INSTALL_DIR
 
-          docker run -v $HOME:$HOME -e ADD_REPO_NAME -e ADD_REPO_NAME_1 -e REPO_NAME -e HOME $DOCKER_IMAGE bash -c 'cd $HOME; source ./node_registry/.github/action.sh'
+          docker run -v $HOME:$HOME -e ACTION_BUILD_DIR -e REPO_NAME -e HOME $DOCKER_IMAGE bash -c 'cd $ACTION_BUILD_DIR; source ./node_registry/.github/action.sh'
