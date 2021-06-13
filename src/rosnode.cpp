@@ -59,6 +59,9 @@ void XNode::shutdown() {
               "\033[34mNode shutdown <<< %s\033[0m", this->node_name_.c_str());
 }
 
+/**
+ * asdsd
+ */
 template<typename T>
 T XNode::getParameterValue(const std::string name,
                   const T default_value) {
@@ -97,6 +100,5 @@ template std::vector<int64_t> node_registry::xnode::XNode::getParameterValue(
     const std::string, const std::vector<int64_t>);
 template std::vector<double> node_registry::xnode::XNode::getParameterValue(
     const std::string, const std::vector<double>);
-template std::vector<
-    std::string> node_registry::xnode::XNode::getParameterValue(
+template std::vector<std::string> node_registry::xnode::XNode::getParameterValue(
     const std::string, const std::vector<std::string>);
