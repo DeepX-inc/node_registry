@@ -9,7 +9,8 @@ from rclpy.node import Node as N
 class XNode(N):
 
     def __init__(self, node_name: str, **kwargs: dict):
-        """Create a XNode
+        """
+        Create a XNode.
 
         Args:
             node_name (str): A name to give to this node.
@@ -42,14 +43,18 @@ class XNode(N):
         return self.get_logger()
 
     def get_parameter_value(self, name: str, default_value: object):
-        """Get a parameter by name or set it with default value if not exists.
+        """
+        Get a parameter by name or set it with default value if not exists.
 
         Args:
             name (str): Fully-qualified name of the parameter, including its
             namespace.
             default_value (object): A default value for the parameter.
 
-        Returns: The parameter value.
+        Returns
+        -------
+        The parameter value.
+
         """
         param = self.get_parameter(name)
         if param.type_ == param.Type.NOT_SET:

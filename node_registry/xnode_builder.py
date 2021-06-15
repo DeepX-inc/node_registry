@@ -21,9 +21,7 @@ from .xnode import XNode
 
 @dataclass
 class XNodeBuilder(object):
-    """Xnode Builder Class.
-
-    """
+    """Xnode Builder Class."""
 
     _REGISTRY = {}
     _PUB_REGISTRY = {}
@@ -39,7 +37,8 @@ class XNodeBuilder(object):
             return self.register_node(node_name=argument)
 
     def __create_node(self, func, node_name: str):
-        """Create a New ROS node.
+        """
+        Create a New ROS node.
 
         Args:
             func ([Callable]):
@@ -50,7 +49,8 @@ class XNodeBuilder(object):
         self._REGISTRY[node_name] = node
 
     def register_node(self, node_name: str):
-        """Registrer a new node in the node_registry.
+        """
+        Registrer a new node in the node_registry.
 
         Args:
             node_name (str): The name of the node.
@@ -66,7 +66,8 @@ class XNodeBuilder(object):
         return _register
 
     def subscribe(self, msg_type, topic_name: str, qos_profile: int = 1):
-        """Create a new subscription.
+        """
+        Create a new subscription.
 
         Args:
             msg_type : The type of ROS messages the subscription
@@ -99,7 +100,8 @@ class XNodeBuilder(object):
     def approx_time_sync(
         self, arguments: list, queue: int = 5, slop: float = 0.1
     ):
-        """Approximately synchronizes messages by their timestamps.
+        """
+        Approximately synchronizes messages by their timestamps.
 
         Args:
             arguments (list): List of (msg_type, topic_name) of
@@ -127,14 +129,17 @@ class XNodeBuilder(object):
         return _register
 
     def service(self, srv_type, srv_name: str):
-        """Create a new service server.
+        """
+        Create a new service server.
 
         Args:
             srv_type : The service type.
             srv_name (str): The name of the service.
 
-        Returns:
+        Returns
+        -------
             [Callable]: Return the callback function.
+
         """
         assert isinstance(srv_name, str)
         assert callable(srv_type)
@@ -150,7 +155,8 @@ class XNodeBuilder(object):
         return _register
 
     def client(self, srv_type, srv_name: str, timeout: float = 5.0):
-        """Create a new service client.
+        """
+        Create a new service client.
 
         Args:
             srv_type : The service type.
@@ -175,7 +181,8 @@ class XNodeBuilder(object):
         return _register
 
     def publisher(self, msg_type, topic_name: str, qos_profile: int = 1):
-        """Create a new Publisher.
+        """
+        Create a new Publisher.
 
         Args:
             msg_type ([type]): The type of ROS messages the publisher will
@@ -198,7 +205,10 @@ class XNodeBuilder(object):
         return _register
 
     def connection_based(self, pub_id):
-        """[summary]
+        """
+        Call a function only if there are active subscribers for.
+
+        the given publish topic.
 
         Args:
             pub_id : A list or tuple of publishers' IDS.
@@ -229,16 +239,19 @@ class XNodeBuilder(object):
         return _register
 
     def parameter(self, param_name: str, value: object):
-        """Create the parameter specified in the argument.
+        """
+        Create the parameter specified in the argument.
 
         Args:
             param_name (str): The name of the parameter
             value (object): The value that need to be assigned to the
                             given parameter.
 
-        Raises:
+        Raises
+        ------
             e: ParameterAlreadyDeclaredException if the parameter
              is already declared.
+
         """
         assert isinstance(param_name, str)
 
@@ -255,14 +268,17 @@ class XNodeBuilder(object):
         return _register
 
     def parameter_list(self, parameters: list):
-        """Create a list of parameters.
+        """
+        Create a list of parameters.
 
         Args:
             parameters (list): List of name & value pair.
 
-        Raises:
+        Raises
+        ------
             e: ParameterAlreadyDeclaredException if the parameter
              is already declared.
+
         """
         assert len(parameters) > 0, 'Cannot create parameter with empty list'
 
@@ -280,13 +296,16 @@ class XNodeBuilder(object):
         return _register
 
     def timer(self, timer_period: float):
-        """Create a new timer.
+        """
+        Create a new timer.
 
         Args:
             timer_period (float): The period in second of the timer.
 
-        Returns:
+        Returns
+        -------
             callback_group: The callback group for the timer.
+
         """
         assert isinstance(timer_period, (int, float))
 
@@ -298,6 +317,12 @@ class XNodeBuilder(object):
         return _register
 
     def inject(self, args):
+        """
+        Inject a function into the Xnode class.
+
+        Args:
+            args: Function which needs to be injected.
+        """
         def update_vars(func, key: str = None):
             ret_val = func()
             if isinstance(ret_val, dict):
@@ -319,15 +344,14 @@ class XNodeBuilder(object):
             return _wrapper
 
     def timeit(self, func, once: bool = False, throttle: int = None):
-        """Calculate the Processing time of the given function.
+        """
+        Calculate the Processing time of the given function.
 
         Args:
             func : The function whose processing time is to be calculated
             once (bool, optional): [description]. Defaults to False.
             throttle (int, optional): [description]. Defaults to None.
-
         """
-
         # TODO: Change to ROS time
         import time
 
@@ -344,8 +368,13 @@ class XNodeBuilder(object):
         return _wrapper
 
     def spin(self):
-        """Execute work and block until the context associated with the
-            executor is shutdown.
+        """
+        Execute work and block until the context associated with the executor.
+
+        is shutdown.
+
+        Args:
+            None.
         """
         try:
             while rclpy.ok():
@@ -354,38 +383,47 @@ class XNodeBuilder(object):
             rclpy.shutdown()
 
     def spin_until_future_complete(self, client, request):
-        """Execute work until the future is complete.
+        """
+        Execute work until the future is complete.
 
         Args:
             client : Service Client.
             request : The service request.
 
-        Returns:
+        Returns
+        -------
             Future [Object]: The future object to wait on.
+
         """
         future = client.call_async(request)
         rclpy.spin_until_future_complete(self.node, future)
         return future
 
     def get_publisher(self, pub_id: str):
-        """Retrieve a publisher.
+        """
+        Retrieve a publisher.
 
         Args:
             pub_id (str): The publisher id.
 
-        Returns:
+        Returns
+        -------
             [Object]: return the publisher_object corresponding to the pub_id.
+
         """
         return self._PUB_REGISTRY.get(pub_id, None)
 
     def get_parameter(self, name: str):
-        """Get a parameter value if it exists.
+        """
+        Get a parameter value if it exists.
 
         Args:
             name (str): Name of the parameter.
 
-        Returns:
+        Returns
+        -------
             [type]: The value of the parameter.
+
         """
         try:
             return self.node.get_parameter(name)
@@ -398,7 +436,8 @@ class XNodeBuilder(object):
         parameter_names: list,
         timeout_sec: float = 5.0,
     ):
-        """Get all the parameter associated with the node.
+        """
+        Get all the parameter associated with the node.
 
         Args:
             node_name (str): THe name of the node.
