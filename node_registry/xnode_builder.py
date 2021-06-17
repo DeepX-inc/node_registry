@@ -21,6 +21,7 @@ from .xnode import XNode
 
 @dataclass
 class XNodeBuilder(object):
+    """Xnode Builder Class."""
 
     _REGISTRY = {}
     _PUB_REGISTRY = {}
@@ -36,11 +37,24 @@ class XNodeBuilder(object):
             return self.register_node(node_name=argument)
 
     def __create_node(self, func, node_name: str):
+        """
+        Create a New ROS node.
+
+        Args:
+            func ([Callable]):
+            node_name (str): The name of the Ros Node.
+        """
         self._node_name = node_name
         node = XNode(node_name)
         self._REGISTRY[node_name] = node
 
     def register_node(self, node_name: str):
+        """
+        Registrer a new node in the node_registry.
+
+        Args:
+            node_name (str): The name of the node.
+        """
         assert isinstance(node_name, str)
 
         def _register(func_or_cls):
@@ -52,6 +66,22 @@ class XNodeBuilder(object):
         return _register
 
     def subscribe(self, msg_type, topic_name: str, qos_profile: int = 1):
+        """
+        Create a new subscription.
+
+        Args:
+            msg_type : The type of ROS messages the subscription
+                     will subscribe to.
+            topic_name (str): The name of the topic the subscription
+                     will subscribe to.
+            qos_profile (int, optional): A QoSProfile or a history depth
+                to apply to the subscription.
+                In the case that a history depth is provided, the QoS history
+                is set to RMW_QOS_POLICY_HISTORY_KEEP_LAST, the QoS history
+                depth is set to the value of the parameter, and all other
+                QoS settings are set to their default values.
+                Defaults to 1.
+        """
         assert isinstance(topic_name, str)
         assert callable(msg_type)
         assert self._node_name is not None
@@ -70,6 +100,17 @@ class XNodeBuilder(object):
     def approx_time_sync(
         self, arguments: list, queue: int = 5, slop: float = 0.1
     ):
+        """
+        Approximately synchronizes messages by their timestamps.
+
+        Args:
+            arguments (list): List of (msg_type, topic_name) of
+                                different Subscriber.
+            queue (int, optional): Size of the queue. Defaults to 5.
+            slop (float, optional): It defines the delay (in seconds)
+                                    with which messages can be synchronized.
+                                    Defaults to 0.1.
+        """
         assert isinstance(arguments, (list, tuple))
 
         def _register(func):
@@ -88,6 +129,18 @@ class XNodeBuilder(object):
         return _register
 
     def service(self, srv_type, srv_name: str):
+        """
+        Create a new service server.
+
+        Args:
+            srv_type : The service type.
+            srv_name (str): The name of the service.
+
+        Returns
+        -------
+            [Callable]: Return the callback function.
+
+        """
         assert isinstance(srv_name, str)
         assert callable(srv_type)
 
@@ -102,6 +155,16 @@ class XNodeBuilder(object):
         return _register
 
     def client(self, srv_type, srv_name: str, timeout: float = 5.0):
+        """
+        Create a new service client.
+
+        Args:
+            srv_type : The service type.
+            srv_name (str): The name of the service.
+            timeout (float, optional): Seconds to wait. If ``None``, then
+            wait forever.
+            Defaults to 5.0.
+        """
         assert isinstance(srv_name, str)
         assert callable(srv_type)
 
@@ -118,6 +181,18 @@ class XNodeBuilder(object):
         return _register
 
     def publisher(self, msg_type, topic_name: str, qos_profile: int = 1):
+        """
+        Create a new Publisher.
+
+        Args:
+            msg_type ([type]): The type of ROS messages the publisher will
+                                publish.
+            topic_name (str): The name of the topic the publisher will
+                                publish to.
+            qos_profile (int, optional): A QoSProfile or a history depth
+                                        to apply to the publisher.
+                                        Defaults to 1.
+        """
         assert isinstance(topic_name, str)
         assert callable(msg_type)
 
@@ -130,6 +205,14 @@ class XNodeBuilder(object):
         return _register
 
     def connection_based(self, pub_id):
+        """
+        Call a function only if there are active subscribers for.
+
+        the given publish topic.
+
+        Args:
+            pub_id : A list or tuple of publishers' IDS.
+        """
         if type(pub_id) == str:
             pub_ids = [pub_id]
         else:
@@ -156,6 +239,20 @@ class XNodeBuilder(object):
         return _register
 
     def parameter(self, param_name: str, value: object):
+        """
+        Create the parameter specified in the argument.
+
+        Args:
+            param_name (str): The name of the parameter
+            value (object): The value that need to be assigned to the
+                            given parameter.
+
+        Raises
+        ------
+            e: ParameterAlreadyDeclaredException if the parameter
+             is already declared.
+
+        """
         assert isinstance(param_name, str)
 
         def _register(func):
@@ -171,6 +268,18 @@ class XNodeBuilder(object):
         return _register
 
     def parameter_list(self, parameters: list):
+        """
+        Create a list of parameters.
+
+        Args:
+            parameters (list): List of name & value pair.
+
+        Raises
+        ------
+            e: ParameterAlreadyDeclaredException if the parameter
+             is already declared.
+
+        """
         assert len(parameters) > 0, 'Cannot create parameter with empty list'
 
         def _register(func):
@@ -187,6 +296,17 @@ class XNodeBuilder(object):
         return _register
 
     def timer(self, timer_period: float):
+        """
+        Create a new timer.
+
+        Args:
+            timer_period (float): The period in second of the timer.
+
+        Returns
+        -------
+            callback_group: The callback group for the timer.
+
+        """
         assert isinstance(timer_period, (int, float))
 
         def _register(func):
@@ -197,6 +317,12 @@ class XNodeBuilder(object):
         return _register
 
     def inject(self, args):
+        """
+        Inject a function into the Xnode class.
+
+        Args:
+            args: Function which needs to be injected.
+        """
         def update_vars(func, key: str = None):
             ret_val = func()
             if isinstance(ret_val, dict):
@@ -218,7 +344,14 @@ class XNodeBuilder(object):
             return _wrapper
 
     def timeit(self, func, once: bool = False, throttle: int = None):
+        """
+        Calculate the Processing time of the given function.
 
+        Args:
+            func : The function whose processing time is to be calculated
+            once (bool, optional): [description]. Defaults to False.
+            throttle (int, optional): [description]. Defaults to None.
+        """
         # TODO: Change to ROS time
         import time
 
@@ -235,6 +368,14 @@ class XNodeBuilder(object):
         return _wrapper
 
     def spin(self):
+        """
+        Execute work and block until the context associated with the executor.
+
+        is shutdown.
+
+        Args:
+            None.
+        """
         try:
             while rclpy.ok():
                 rclpy.spin(self.node)
@@ -242,14 +383,48 @@ class XNodeBuilder(object):
             rclpy.shutdown()
 
     def spin_until_future_complete(self, client, request):
+        """
+        Execute work until the future is complete.
+
+        Args:
+            client : Service Client.
+            request : The service request.
+
+        Returns
+        -------
+            Future [Object]: The future object to wait on.
+
+        """
         future = client.call_async(request)
         rclpy.spin_until_future_complete(self.node, future)
         return future
 
     def get_publisher(self, pub_id: str):
+        """
+        Retrieve a publisher.
+
+        Args:
+            pub_id (str): The publisher id.
+
+        Returns
+        -------
+            [Object]: return the publisher_object corresponding to the pub_id.
+
+        """
         return self._PUB_REGISTRY.get(pub_id, None)
 
     def get_parameter(self, name: str):
+        """
+        Get a parameter value if it exists.
+
+        Args:
+            name (str): Name of the parameter.
+
+        Returns
+        -------
+            [type]: The value of the parameter.
+
+        """
         try:
             return self.node.get_parameter(name)
         except ParameterNotDeclaredException as e:
@@ -261,6 +436,15 @@ class XNodeBuilder(object):
         parameter_names: list,
         timeout_sec: float = 5.0,
     ):
+        """
+        Get all the parameter associated with the node.
+
+        Args:
+            node_name (str): THe name of the node.
+            parameter_names (list): List of parameter names.
+            timeout_sec (float, optional): Seconds to wait. If ``None``, then
+            wait forever. Defaults to 5.0.
+        """
         client = self.node.create_client(
             GetParameters, f'{node_name}/get_parameters'
         )
