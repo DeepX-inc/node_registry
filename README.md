@@ -17,10 +17,9 @@ For detailed instructions on how to:
 - [Build](https://github.com/DeepX-inc/node_registry)
 - [Install](https://github.com/DeepX-inc/node_registry)
 - [General Tutorials](https://github.com/DeepX-inc/node_registry) 
-- [Configure](https://github.com/DeepX-inc/node_registry)
+- [Configure](https://github.com/DeepX-inc/node_registry/wiki/Configure)
 
 
 
 ---
 ---
-
