@@ -16,7 +16,7 @@ For detailed instructions on how to:
 - [Concepts](https://github.com/DeepX-inc/node_registry)
 - [Build](https://github.com/DeepX-inc/node_registry)
 - [Install](https://github.com/DeepX-inc/node_registry)
-- [General Tutorials](https://github.com/DeepX-inc/node_registry) 
+- [General Tutorials](https://github.com/DeepX-inc/node_registry/wiki/Simple-Listener-&-Talker) 
 - [Configure](https://github.com/DeepX-inc/node_registry/wiki/Configure)
 
 
