@@ -12,7 +12,7 @@ The node_registry package provides the base node classes and utils to eliminate 
 
 
 For detailed instructions on how to:
-- [Getting Started](https://github.com/DeepX-inc/node_registry)
+- [Getting Started](https://github.com/DeepX-inc/node_registry/wiki)
 - [Concepts](https://github.com/DeepX-inc/node_registry/wiki/Python-Decorators-for-Node_Registry)
 - [Install](https://github.com/DeepX-inc/node_registry)
 - [General Tutorials](https://github.com/DeepX-inc/node_registry/wiki/Simple-Listener-&-Talker) 
