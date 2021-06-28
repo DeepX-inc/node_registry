@@ -4,7 +4,7 @@
   <name>node_registry</name>
   <version>0.0.1</version>
   <description>ROS Node registry</description>
-  <author email="krishneel.chaudhary@deepx.co.jp">Krishneel Chaudhary</author>
+  <maintainer email="krishneel.chaudhary@deepx.co.jp">Krishneel Chaudhary</maintainer>
   <maintainer email="nandish.patel@deepx.co.jp">Nandish Patel</maintainer>
   <maintainer email="rahul.katiyar@deepx.co.jp">Rahul Katiyar</maintainer>
   <license>BSD-3-Clause</license>
@@ -17,7 +17,6 @@
   <test_depend>ament_lint_auto</test_depend>
   <test_depend>ament_lint_common</test_depend>
   <test_depend>ament_flake8</test_depend>
-  <test_depend>test_common_utils</test_depend>
 
   <export>
     <build_type>ament_cmake</build_type>
