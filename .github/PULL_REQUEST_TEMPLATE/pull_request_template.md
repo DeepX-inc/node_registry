@@ -21,7 +21,6 @@ Put an x in the boxes that apply. You can also fill these out after creating the
 - [ ] Any dependent changes have been merged
 - [ ] Added tests (automatic or manual) that prove the fix is effective or that the feature works
 
-
 **Code/Quality Assurance Only**
 - [ ] My changes generate no new warnings 
 - [ ] My PR currently breaks something (fix or feature that would cause existing functionality to not work as expected)
