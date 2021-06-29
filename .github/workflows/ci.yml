@@ -1,4 +1,4 @@
-name: node_registry
+name: ci
 
 on:
   push:
