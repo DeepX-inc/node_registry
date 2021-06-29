@@ -31,4 +31,3 @@ source ./install/setup.bash
 colcon test --event-handlers console_direct+ --packages-select node_registry
 
 colcon test-result --all
-
