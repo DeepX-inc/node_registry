@@ -80,7 +80,6 @@ def generate_test_description():
                         )
                     ],
                 ),
-                launch_testing.actions.ReadyToTest(),
             ]),
         locals(),
     )
