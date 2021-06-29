@@ -1,5 +1,5 @@
 ### Description
-Include a summary of the change and relevant motivation/context.  
+Include a summary of the change and relevant motivation/context.
 List any dependencies that are required for this change.
 
 Fixes # [ISSUE NUMBER HERE]
@@ -22,7 +22,7 @@ Put an x in the boxes that apply. You can also fill these out after creating the
 - [ ] Checked that [all tests](https://github.com/DeepX-inc/node_registry/blob/main/.github/how_to_build_and_test.md) pass with my changes
 
 **Code/Quality Assurance Only**
-- [ ] My changes generate no new warnings 
+- [ ] My changes generate no new warnings
 - [ ] My PR currently breaks something (fix or feature that would cause existing functionality to not work as expected)
 - [ ] I have added tests that prove my fix is effective
 - [ ] New and existing unit tests pass locally with my changes
