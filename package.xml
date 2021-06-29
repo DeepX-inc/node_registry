@@ -3,11 +3,13 @@
 <package format="3">
   <name>node_registry</name>
   <version>0.0.1</version>
-  <description>ROS Node registry</description>
-  <maintainer email="krishneel.chaudhary@deepx.co.jp">Krishneel Chaudhary</maintainer>
+  <description>ROS2 Node registry</description>
   <maintainer email="nandish.patel@deepx.co.jp">Nandish Patel</maintainer>
   <maintainer email="rahul.katiyar@deepx.co.jp">Rahul Katiyar</maintainer>
   <license>BSD-3-Clause</license>
+
+  <url>https://github.com/DeepX-inc/node_registry/wiki</url>
+  <author>Krishneel Chaudhary</author>
 
   <buildtool_depend>ament_cmake</buildtool_depend>
 
