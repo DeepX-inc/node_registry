@@ -19,7 +19,7 @@ Put an x in the boxes that apply. You can also fill these out after creating the
 - [ ] Added the corresponding license to each file and add the current year of any one that you modified.
 - [ ] Any dependent changes have been merged
 - [ ] Added tests (automatic or manual) that prove the fix is effective or that the feature works
-- [ ] Checked that [all tests](../how_to_build_and_test.md) pass with my changes
+- [ ] Checked that [all tests](how_to_build_and_test.md) pass with my changes
 
 **Code/Quality Assurance Only**
 - [ ] My changes generate no new warnings 
