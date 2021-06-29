@@ -13,13 +13,13 @@ Fixes # [ISSUE NUMBER HERE]
 ### Checklist:
 Put an x in the boxes that apply. You can also fill these out after creating the PR. This is a reminder of what we should look for before merging this code. I have:
 
-- [ ] Checked that all tests pass with my changes
 - [ ] My PR follows the style guidelines of this project
 - [ ] I have commented my code or provided relevant documentation
 - [ ] I have made corresponding changes to the documentation
 - [ ] Added the corresponding license to each file and add the current year of any one that you modified.
 - [ ] Any dependent changes have been merged
 - [ ] Added tests (automatic or manual) that prove the fix is effective or that the feature works
+- [ ] Checked that [all tests](../how_to_build_and_test.md) pass with my changes
 
 **Code/Quality Assurance Only**
 - [ ] My changes generate no new warnings 
