@@ -2,11 +2,14 @@
 <?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
 <package format="3">
   <name>node_registry</name>
-  <version>0.0.0</version>
-  <description>ROS Node registry</description>
-  <maintainer email="krishneel.chaudhary@deepx.co.jp">Krishneel Chaudhary</maintainer>
-  <maintainer email="lu.chenyue@deepx.co.jp">Lu Chenyue</maintainer>
-  <license>TODO: License declaration</license>
+  <version>0.0.1</version>
+  <description>ROS2 Node registry</description>
+  <maintainer email="nandish.patel@deepx.co.jp">Nandish Patel</maintainer>
+  <maintainer email="rahul.katiyar@deepx.co.jp">Rahul Katiyar</maintainer>
+  <license>BSD-3-Clause</license>
+
+  <url>https://github.com/DeepX-inc/node_registry/wiki</url>
+  <author>Krishneel Chaudhary</author>
 
   <buildtool_depend>ament_cmake</buildtool_depend>
 
@@ -16,7 +19,6 @@
   <test_depend>ament_lint_auto</test_depend>
   <test_depend>ament_lint_common</test_depend>
   <test_depend>ament_flake8</test_depend>
-  <test_depend>test_common_utils</test_depend>
 
   <export>
     <build_type>ament_cmake</build_type>

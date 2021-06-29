@@ -31,22 +31,6 @@ jobs:
           path: ${{ env.INSTALL_DIR }}/node_registry
           clean: true
 
-      - name: Clone deepx_ros_test
-        uses: actions/checkout@v2
-        with:
-          repository: DeepX-inc/deepx_ros_test
-          path: ${{ env.INSTALL_DIR }}/deepx_ros_test
-          ssh-key: ${{ secrets.DETRABOT_SECRET}}
-          clean: true
-
-      - name: Clone deepx_ros_common
-        uses: actions/checkout@v2
-        with:
-          repository: DeepX-inc/deepx_ros_common
-          path: ${{ env.INSTALL_DIR }}/deepx_ros_common
-          ssh-key: ${{ secrets.DETRABOT_SECRET}}
-          clean: true
-
       - name: Install Python
         uses: actions/setup-python@v2
         with:
