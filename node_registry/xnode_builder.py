@@ -27,17 +27,14 @@
 # ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 # POSSIBILITY OF SUCH DAMAGE.
 # @author Krishneel Chaudhary
-
+"""Xnode Builder."""
 from dataclasses import dataclass
 from threading import Lock
 
-from rcl_interfaces.srv import GetParameters
-
 import rclpy
-from rclpy.exceptions import (
-    ParameterAlreadyDeclaredException,
-    ParameterNotDeclaredException,
-)
+from rcl_interfaces.srv import GetParameters
+from rclpy.exceptions import (ParameterAlreadyDeclaredException,
+                              ParameterNotDeclaredException)
 
 from .xnode import XNode
 
@@ -52,6 +49,7 @@ class XNodeBuilder(object):
     _lock = Lock()
 
     def __call__(self, argument: str):
+        """Xnode Call."""
         if callable(argument):
             func = argument
             self.__create_node(func, func())
@@ -138,8 +136,7 @@ class XNodeBuilder(object):
 
         def _register(func):
             assert callable(func)
-            from message_filters import ApproximateTimeSynchronizer
-            from message_filters import Subscriber
+            from message_filters import ApproximateTimeSynchronizer, Subscriber
 
             subscribers = [
                 Subscriber(self.node, msg_type, topic_name)
@@ -480,7 +477,8 @@ class XNodeBuilder(object):
 
         request = GetParameters.Request()
         request.names = parameter_names
-        future = self.spin_until_future_complete(client=client, request=request)
+        future = self.spin_until_future_complete(
+            client=client, request=request)
 
         response = future.result()
         if response is None:
@@ -492,6 +490,7 @@ class XNodeBuilder(object):
 
     @property
     def use_sim_time(self):
+        """Get use_sim_time Value."""
         try:
             return self.get_parameter('use_sim_time').value
         except AttributeError:
@@ -500,14 +499,17 @@ class XNodeBuilder(object):
 
     @property
     def logger(self):
+        """Get Logger."""
         return self.node.get_logger()
 
     @property
     def clock_now(self):
+        """Get current time."""
         return self.node.get_clock().now()
 
     @property
     def node(self):
+        """Get Xnode object."""
         return self._REGISTRY.get(self._node_name, None)
 
     """
@@ -519,5 +521,6 @@ class XNodeBuilder(object):
 
 
 def node_init(args=None):
+    """Initialize of Xnode."""
     rclpy.init(args=args)
     return XNodeBuilder()

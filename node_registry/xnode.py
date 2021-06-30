@@ -27,7 +27,7 @@
 # ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 # POSSIBILITY OF SUCH DAMAGE.
 # @author Krishneel Chaudhary
-
+"""XNode Util."""
 import os
 
 import rclpy
@@ -35,6 +35,7 @@ from rclpy.node import Node as N
 
 
 class XNode(N):
+    """XNode Class."""
 
     def __init__(self, node_name: str, **kwargs: dict):
         """
@@ -68,6 +69,7 @@ class XNode(N):
 
     @property
     def logger(self):
+        """Get Logger."""
         return self.get_logger()
 
     def get_parameter_value(self, name: str, default_value: object):
@@ -93,6 +95,7 @@ class XNode(N):
         return param.value
 
     def __del__(self):
+        """Destroy Node."""
         print(
             f'\033[34mNode shutdown <<< {self._name} \033[0m'
         )

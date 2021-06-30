@@ -27,16 +27,15 @@
 # ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 # POSSIBILITY OF SUCH DAMAGE.
 # @author Krishneel Chaudhary
-
+"""Python Xnode Decorators."""
 from .xnode_builder import node_init
-
 
 rosnode = node_init()
 
 
 def register(globals_params: dict = None):
     """
-    Spins the rosnode on the executor.
+    Spin the rosnode on the executor.
 
     Args:
     ----
@@ -66,7 +65,7 @@ def register(globals_params: dict = None):
 
 
 def register_node(func_or_dict):
-
+    """Registor Node in XNode."""
     def _register(func):
         assert callable(func)
         func()
