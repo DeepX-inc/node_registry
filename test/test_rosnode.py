@@ -30,7 +30,7 @@
 
 
 import contextlib
-import launch_testing
+import launch_testing.markers
 import launch_testing.actions
 import os
 import pytest
@@ -43,6 +43,7 @@ from launch_ros.actions import Node
 
 
 __PYTHONUNBUFFERED__ = '1'
+__REPEAT__ = 3
 
 
 @pytest.mark.rostest
@@ -107,6 +108,7 @@ class TestRosNode(unittest.TestCase):
                 yield topic_command
         cls.launch_topic_command = launch_topic_command
 
+    @launch_testing.markers.retry_on_failure(times=__REPEAT__, delay=1)
     def test_check_all_topics(self, expected_output=['/chatter']):
         with self.launch_topic_command(arguments=['list']) as topic_command:
             assert topic_command.wait_for_shutdown(self.timeout)
@@ -117,6 +119,7 @@ class TestRosNode(unittest.TestCase):
                 strict=False,
             ), f'Expected: {expected_output}, Received: {topic_command.output}'
 
+    @launch_testing.markers.retry_on_failure(times=__REPEAT__, delay=1)
     def test_topic_endpoint_info(self, topic_name='/chatter', expected_output=[
                 'Type: std_msgs/msg/String',
                 'Publisher count: 1',
@@ -136,6 +139,7 @@ class TestRosNode(unittest.TestCase):
             strict=True,
         ), f'Expected: {expected_output}, Received: {topic_command.output}'
 
+    @launch_testing.markers.retry_on_failure(times=__REPEAT__, delay=1)
     def test_topic_type(self, topic_name='/chatter', expected_output=[
                 'std_msgs/msg/String']):
         with self.launch_topic_command(
