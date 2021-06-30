@@ -521,6 +521,6 @@ class XNodeBuilder(object):
 
 
 def node_init(args=None):
-    """Initialize of Nnode."""
+    """Initialize of Xnode."""
     rclpy.init(args=args)
     return XNodeBuilder()
