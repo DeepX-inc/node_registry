@@ -42,7 +42,7 @@ def node():
     return 'talker_node'
 
 
-@rosnode.timer(1.0)
+@rosnode.timer(0.1)
 def timer_cb():
     global counter
 
