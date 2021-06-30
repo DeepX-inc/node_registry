@@ -30,17 +30,17 @@
 
 
 import contextlib
-import launch_testing.markers
-import launch_testing.actions
 import os
-import pytest
-import unittest
 import sys
+import unittest
 
+import launch_testing
+import launch_testing.actions
+import launch_testing.markers
+import pytest
 from launch import LaunchDescription
 from launch.actions import ExecuteProcess
 from launch_ros.actions import Node
-
 
 __PYTHONUNBUFFERED__ = '1'
 __REPEAT__ = 3
