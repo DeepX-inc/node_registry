@@ -1,3 +1,6 @@
+# This repository is deprecated!
+
+Please refer to the [deepx_system_integration](https://github.com/DeepX-inc/deepx_system_integration) repository. See [this ClickUp task](https://app.clickup.com/t/251q867) for details.
 
 ![Build workflow](https://github.com/DeepX-inc/node_registry/actions/workflows/ci.yml/badge.svg)
 [![License](https://img.shields.io/badge/License-BSD%203--Clause-blue.svg)](https://github.com/DeepX-inc/node_registry/blob/main/LICENSE)
